@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# PHP uzantısını gizlemek için
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+# codes.txt dosyasına doğrudan erişimi engelle
+<Files "codes.txt">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# .htaccess dosyasına erişimi engelle
+<Files ".htaccess">
+    Order Allow,Deny
+    Deny from all
+</Files>
