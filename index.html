@@ -3,129 +3,223 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Key Generator — Premium</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<title>Key Generator — Dark</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f6f8fb;
-    --card:#ffffff;
-    --accent:#2563eb;
-    --muted:#6b7280;
+    --bg1:#080007;
+    --bg2:#13001a;
+    --glow:#c300ff;
+    --muted:#b8a3d9;
+    --card:#0f0912;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#111;background:linear-gradient(180deg,#f6f8fb,#eef2f7);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px}
-  .wrap{width:min(860px,96%);display:flex;gap:28px;align-items:center;justify-content:center;flex-direction:column}
-  .card{
-    width:100%;max-width:720px;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);
-    border-radius:14px;padding:30px;border:1px solid rgba(16,24,40,0.04);box-shadow:0 12px 40px rgba(16,24,40,0.06);
-    display:flex;gap:20px;align-items:center;justify-content:space-between;
-    flex-wrap:wrap;
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Orbitron", monospace;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(195,0,255,0.08), transparent),
+                linear-gradient(135deg,var(--bg1),var(--bg2));
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
 
-  .left{
-    flex:1;min-width:220px;
+  .shell{
+    width:min(820px,94%);
+    padding:28px;
+    border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow:0 8px 40px rgba(0,0,0,0.6), 0 0 40px rgba(195,0,255,0.08);
+    border:1px solid rgba(255,255,255,0.03);
+    display:grid;
+    grid-template-columns: 1fr 380px;
+    gap:22px;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
   }
-  .brand{display:flex;align-items:center;gap:14px}
-  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0b3a66}
-  h2{margin:0;font-size:20px;color:#0b1321}
-  .desc{color:var(--muted);margin-top:6px;font-size:14px}
 
-  .right{display:flex;flex-direction:column;gap:12px;align-items:flex-end;min-width:260px}
-  .key{
-    width:100%;padding:14px 18px;border-radius:10px;background:linear-gradient(180deg,rgba(16,24,40,0.02),rgba(16,24,40,0.01));font-weight:700;font-size:18px;color:#0b1321;letter-spacing:0.6px;text-align:center;
+  /* left: terminal style */
+  .terminal{
+    padding:22px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(10,0,10,0.4));
+    border-radius:10px;
+    min-height:220px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:12px;
+    box-shadow: inset 0 0 40px rgba(195,0,255,0.02);
   }
-  .controls{display:flex;gap:10px;align-items:center}
-  button.primary{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
-  button.ghost{background:transparent;border:1px solid rgba(16,24,40,0.06);padding:9px 12px;border-radius:8px;cursor:pointer;color:var(--muted)}
+  .small { color:var(--muted); font-size:13px; opacity:0.9; }
+  .status { color:#9ff; font-size:14px; }
+  .keybox{
+    margin-top:6px;
+    padding:18px;
+    background:linear-gradient(90deg, rgba(16,10,16,0.6), rgba(8,3,12,0.75));
+    border-radius:8px;
+    border:1px solid rgba(195,0,255,0.12);
+    font-size:20px;
+    letter-spacing:1px;
+    color:var(--glow);
+    text-shadow:0 0 18px rgba(195,0,255,0.9);
+    word-break:break-all;
+    min-height:56px;
+    display:flex;
+    align-items:center;
+  }
 
-  .meta{margin-top:8px;color:var(--muted);font-size:13px;text-align:center}
+  /* right: controls */
+  .controls{
+    padding:18px;
+    border-radius:10px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.005));
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    align-items:stretch;
+  }
+  .brand{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .logo{
+    width:46px;height:46px;border-radius:10px;
+    background:linear-gradient(135deg,#300039,#8a00b3);
+    box-shadow:0 6px 18px rgba(138,0,179,0.15), inset 0 -6px 18px rgba(0,0,0,0.2);
+    display:flex;align-items:center;justify-content:center;font-weight:700;
+  }
+  h1{font-size:16px;margin:0;color:#fff}
+  .sub{font-size:12px;color:var(--muted)}
 
-  @media (max-width:720px){
-    .card{flex-direction:column;align-items:stretch}
-    .right{align-items:stretch}
+  .bigbtn{
+    margin-top:8px;
+    padding:14px 18px;
+    border-radius:10px;
+    border:0;
+    background: linear-gradient(90deg,var(--glow),#8a00b3);
+    color:#0b0010;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 8px 30px rgba(195,0,255,0.12);
+    transition:transform .12s ease;
+  }
+  .bigbtn:active{transform:scale(.98)}
+  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px;border-radius:8px;cursor:pointer}
+
+  .meta{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+
+  .countdown{font-size:13px;color:#9ff;font-weight:700}
+
+  /* responsive */
+  @media (max-width:880px){
+    .shell{grid-template-columns:1fr; padding:20px}
+    .controls{order:2}
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <div class="left">
-        <div class="brand">
-          <div class="logo">K</div>
-          <div>
-            <h2>Your Key</h2>
-            <div class="desc">Secure one-time keys — next key available after cooldown.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="right">
-        <div id="keyDisplay" class="key">Loading…</div>
-        <div style="display:flex;gap:8px">
-          <button class="primary" id="refreshBtn">Get New Key</button>
-          <button class="ghost" id="copyBtn">Copy</button>
-        </div>
-        <div class="meta" id="metaText">IP cooldown: 30 minutes</div>
+  <div class="shell">
+    <div class="terminal">
+      <div class="brand small"><span class="small">🔐</span><div style="width:8px"></div><div class="small">Secure Key Terminal</div></div>
+      <div class="status">> Generating secure key... <span id="dot" style="opacity:.6">.</span></div>
+      <div class="keybox" id="keyDisplay">—</div>
+      <div class="meta">
+        <div class="small">Status: <span id="statusText">Loading</span></div>
+        <div class="countdown" id="countdown">—</div>
       </div>
     </div>
 
-    <div style="max-width:720px;text-align:center;color:var(--muted);font-size:13px">
-      Tip: This page uses IP-based cooldown to prevent repeated claims. If you have trouble, contact support.
+    <div class="controls">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div class="brand">
+            <div class="logo">K</div>
+            <div>
+              <h1>Key Generator</h1>
+              <div class="sub">Dark Futuristic • Secure</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="sub">v1.0</div>
+          <div class="sub" style="margin-top:6px">IP cooldown: 30m</div>
+        </div>
+      </div>
+
+      <button class="bigbtn" id="refreshBtn">Generate / Refresh</button>
+      <div style="display:flex;gap:8px">
+        <button id="copyBtn" class="ghost">Copy</button>
+        <button id="openBtn" class="ghost" onclick="window.open('https://t.me/+S145y8OSyJdmZjdk','_blank')">Support</button>
+      </div>
+
+      <div style="font-size:13px;color:var(--muted);margin-top:6px">
+        Tips: Clearing cookies won't bypass IP-based cooldown. If you need another key, wait the shown time or contact support.
+      </div>
     </div>
   </div>
 
 <script>
-  async function loadKey() {
-    const keyEl = document.getElementById('keyDisplay');
-    const meta = document.getElementById('metaText');
-    keyEl.innerText = 'Requesting…';
+  // little dot anim
+  let d=0; setInterval(()=>{ d=(d+1)%4; document.getElementById('dot').innerText='.'.repeat(d) },400);
+
+  async function getKey() {
+    const el = document.getElementById('keyDisplay');
+    const status = document.getElementById('statusText');
+    const cd = document.getElementById('countdown');
+    status.innerText='Requesting';
     try {
-      const res = await fetch('/api/key',{cache:'no-store'});
+      const res = await fetch('/api/key', {cache:'no-store'});
       const j = await res.json();
       if (j.error) {
-        keyEl.innerText = j.error;
-        meta.innerText = 'Status: Error';
+        el.innerText = j.error;
+        status.innerText='Error';
+        cd.innerText = '';
         return;
       }
       if (j.code) {
-        keyEl.innerText = j.code;
-        if (j.remainingMinutes && j.remainingMinutes>0) {
-          startCountdown(j.remainingMinutes);
-          meta.innerText = `Next key available in ${j.remainingMinutes} minute(s)`;
-        } else {
-          meta.innerText = 'Ready for a new key';
-        }
+        el.innerText = j.code;
+        status.innerText = j.remainingMinutes && j.remainingMinutes>0 ? 'On cooldown' : 'OK';
+        startCountdown(j.remainingMinutes || 0);
       } else {
-        keyEl.innerText = 'No codes';
-        meta.innerText = 'Status: Empty';
+        el.innerText='No code available';
+        status.innerText='Empty';
       }
     } catch (e) {
-      keyEl.innerText = 'Network error';
-      meta.innerText = 'Status: Offline';
+      el.innerText='Network error';
+      status.innerText='Offline';
       console.error(e);
     }
   }
 
-  let timer=null;
-  function startCountdown(minutes){
-    clearInterval(timer);
-    const end = Date.now() + minutes*60000;
-    timer = setInterval(()=>{
-      const ms = end - Date.now();
-      if (ms <= 0){ clearInterval(timer); document.getElementById('metaText').innerText='Ready'; return;}
+  // countdown in mm:ss from minutes value
+  let countdownTimer = null;
+  function startCountdown(minutes) {
+    clearInterval(countdownTimer);
+    const target = Date.now() + (minutes*60000);
+    if (!minutes || minutes<=0) {
+      document.getElementById('countdown').innerText = 'Ready';
+      return;
+    }
+    countdownTimer = setInterval(()=>{
+      const ms = target - Date.now();
+      if (ms <= 0) { clearInterval(countdownTimer); document.getElementById('countdown').innerText='Ready'; return; }
       const m = Math.floor(ms/60000); const s = Math.floor((ms%60000)/1000);
-      document.getElementById('metaText').innerText = `Next key in ${m}m ${s}s`;
-    },250);
+      document.getElementById('countdown').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    },300);
   }
 
-  document.getElementById('refreshBtn').addEventListener('click', loadKey);
+  document.getElementById('refreshBtn').addEventListener('click', getKey);
   document.getElementById('copyBtn').addEventListener('click', ()=>{
-    const k = document.getElementById('keyDisplay').innerText || '';
-    navigator.clipboard.writeText(k.trim()).then(()=> alert('Copied to clipboard'));
+    const k = document.getElementById('keyDisplay').innerText.split('\n')[0] || '';
+    navigator.clipboard.writeText(k.trim()).then(()=> alert('Copied'));
   });
 
-  // init
-  loadKey();
+  // load on start
+  getKey();
 </script>
 </body>
 </html>
